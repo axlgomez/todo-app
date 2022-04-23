@@ -1,0 +1,62 @@
+@use "../abstract/" as *;
+@use "../base/" as *;
+
+body
+{
+    margin: auto;
+    width: 50%;
+}
+
+input 
+{
+    margin: 0;
+    border: none;
+    border-radius: 0;
+    width: 75%;
+    padding: 10px;
+    font-size: 16px;
+}
+
+.addBtn 
+{
+    padding: 10px;
+    width: 25%;
+    background: #d9d9d9;
+    color: #555;
+    float: right;
+    text-align: center;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+    border-radius: 0;
+}  
+
+#myUL
+{
+    margin-top: 1rem;
+}
+
+ul 
+{
+    margin: 0;
+    padding: 0;
+}
+
+li
+{
+    position: relative;
+    list-style: none;
+    padding: 12px 8px 12px 40px;
+    background: $veryDarkBlue;
+    color: $veryLightGray;
+    outline: 1px solid $lightGrayishBlue1;
+    text-align: start;
+}
+
+.close
+{
+    position: absolute;
+    top: 0; right: 0;
+    padding: 12px 16px 12px 16px;
+    cursor: pointer;
+}
