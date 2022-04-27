@@ -4,6 +4,7 @@
 //Delete todos from the list
 //Clear all completed todos
 //Filter by all/active/complete todos
+//Drag and drop to reorder items on the list
 
 const addBtn = document.querySelector(".addBtn");
 const clearBtn = document.querySelector(".clear");
@@ -23,6 +24,7 @@ const newElement = () => {
 
     if (myInput !== "") {
         document.querySelector("#myUL").appendChild(li);
+        document.querySelector('#drag').classList.add("show");
     }
     document.querySelector("#myInput").value = "";
 
@@ -65,7 +67,15 @@ const clearItems = () => {
 
 clearBtn.addEventListener('click', clearItems)
 
-//Filters
+//Add dynamic number
+
+const todoCount = document.querySelector('.count');
+todoCount.innerText = document.querySelectorAll("#myUL li").length;
+
+const updateCount = (num) => {
+    todoCount.innerText = +todoCount.innerText + num;
+}
+
 // Add active class to the current control button (highlight it)
 
 let btns = document.getElementsByClassName("btn");
@@ -76,3 +86,54 @@ for (let i = 0; i < btns.length; i++) {
     this.className += " active";
   });
 }
+
+//Filters
+
+const filterSelection = (id) => {
+    const todos = document.querySelectorAll('label');
+
+    switch (id) {
+        case 'all':
+            todos.forEach(todo=>{
+                const div = todo.parentElement;
+                div.classList.remove("display");
+            });
+        break;
+        case 'active':
+            todos.forEach(todo=>{
+                if (todo.classList.contains('checked')) {
+                    const div = todo.parentElement;
+                    div.classList.add("display");
+                } else{
+                    const div = todo.parentElement;
+                    div.classList.remove("display");
+                }
+            });
+        break;
+        default:
+            todos.forEach(todo=>{
+                if (todo.classList.contains('checked')) {
+                    const div = todo.parentElement;
+                    div.classList.remove("display");
+                } else{
+                    const div = todo.parentElement;
+                    div.classList.add("display");
+                }
+            });
+        break;
+    }
+};
+
+document.querySelectorAll(".btn").forEach(button =>{
+    button.addEventListener('click', (e) => {
+        filterSelection(e.target.id);
+    });
+});
+
+// drag-and-drop
+// SortableJS -->  JavaScript library for reorderable drag-and-drop lists.
+
+const reorderItems = document.querySelector("#myUL");
+Sortable.create(reorderItems, {
+    animation: 150
+});
