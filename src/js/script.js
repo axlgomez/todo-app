@@ -8,6 +8,8 @@
 
 const addBtn = document.querySelector(".addBtn");
 const clearBtn = document.querySelector(".clear");
+const todoInput = document.querySelector("#myInput");
+const textDrag = document.querySelector("#drag");
 
 // Create a list item when clicking on the "Add" button
 
@@ -17,14 +19,15 @@ const newElement = () => {
     const label = document.createElement("label");
     let input = document.createElement("input");
     input.setAttribute("type", "checkbox");
-    const span = document.createTextNode(myInput);
+    const myInputValue = document.createTextNode(myInput);
 
-    label.append(input, span);
+    label.append(input, myInputValue);
     li.appendChild(label);
 
     if (myInput !== "") {
         document.querySelector("#myUL").appendChild(li);
-        document.querySelector('#drag').classList.add("show");
+        textDrag.style.display = "block";
+        updateCount();
     }
     document.querySelector("#myInput").value = "";
 
@@ -41,6 +44,11 @@ const newElement = () => {
             const item = e.target;
             const div = item.parentElement;
             div.remove();
+            updateCount();
+            const todos = document.querySelectorAll('li');
+                if (todos.length === 0) {
+                    textDrag.style.display = "none"; 
+                }
         })
     }
 
@@ -48,12 +56,22 @@ const newElement = () => {
     li.addEventListener('click', (e) => {
     if (e.target.tagName === 'INPUT') {
         label.classList.toggle('checked');
+        updateCount();
     }
     });
 
 };
 
 addBtn.addEventListener("click", newElement);
+
+// Create a list item with keypress event
+
+todoInput.addEventListener('keypress', e =>{
+    if (e.keyCode === 13 && todoInput.value) {
+        newElement(todoInput.value);
+        todoInput.value = "";
+    }
+});
 
 // Remove all completed todos when clicking on the "Clear" button
 
@@ -62,6 +80,10 @@ const clearItems = () => {
     itemsCompleted.forEach(item=> {
         const div = item.parentElement;
         div.remove();
+        const todos = document.querySelectorAll('li');
+            if (todos.length === 0) {
+                textDrag.style.display = "none"; 
+            }
     });
 };
 
@@ -69,11 +91,14 @@ clearBtn.addEventListener('click', clearItems)
 
 //Add dynamic number
 
-const todoCount = document.querySelector('.count');
-todoCount.innerText = document.querySelectorAll("#myUL li").length;
+const todosCount = document.querySelectorAll('.count');
 
-const updateCount = (num) => {
-    todoCount.innerText = +todoCount.innerText + num;
+const updateCount = () => {
+    for (let todocount of todosCount){
+        todocount.innerText = 
+        document.querySelectorAll("#myUL li").length - 
+        document.querySelectorAll(".checked").length;
+    }
 }
 
 // Add active class to the current control button (highlight it)
