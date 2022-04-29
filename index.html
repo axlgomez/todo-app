@@ -6,13 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" sizes="32x32" href="./build/images/favicon-32x32.png">
     <link rel="stylesheet" href="build/style/main.css">
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
     <script src="/src/js/script.js" defer></script>
     <title>Todo app</title>
 </head>
 <body>
 
   <header>
-    <h2 class="git ">TODO</h2>
+    <h2>TODO</h2>
   </header>
 
   <main>
@@ -25,11 +26,15 @@
     <ul id="myUL"></ul>
 
     <div class="buttons">
+
+      <div class="counter">
+        <p><span class="count">0</span> items left</p>
+      </div>
       
       <div id="myBtnContainer">
-        <button class="btn active" id="all">All</button>
-        <button class="btn" id="active">Active</button>
-        <button class="btn" id="completed">Completed</button>
+        <button class="btn active" data-button="all">All</button>
+        <button class="btn" data-button="active">Active</button>
+        <button class="btn" data-button="completed">Completed</button>
       </div>
 
       <div>
@@ -38,7 +43,17 @@
 
     </div>
 
+    <div id="myBtns">
+      <button class="btn" data-button="all">All</button>
+      <button class="btn" data-button="active">Active</button>
+      <button class="btn" data-button="completed">Completed</button>
+    </div>
+
   </main>
+
+  <footer>
+    <p class="footer__text" id="drag">Drag and drop to reorder list</p>
+  </footer>
 
 </body>
 </html>
