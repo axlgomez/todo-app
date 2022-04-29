@@ -114,10 +114,10 @@ for (let i = 0; i < btns.length; i++) {
 
 //Filters
 
-const filterSelection = (id) => {
+const filterSelection = (button) => {
     const todos = document.querySelectorAll('label');
 
-    switch (id) {
+    switch (button) {
         case 'all':
             todos.forEach(todo=>{
                 const div = todo.parentElement;
@@ -151,7 +151,7 @@ const filterSelection = (id) => {
 
 document.querySelectorAll(".btn").forEach(button =>{
     button.addEventListener('click', (e) => {
-        filterSelection(e.target.id);
+        filterSelection(e.target.dataset.button);
     });
 });
 
