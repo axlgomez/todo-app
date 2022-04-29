@@ -7,6 +7,7 @@
     margin: 0; padding: 0;
     text-decoration: none;
     transition: .2s all linear;
+    border: none; outline: none;
 }
 
 html
@@ -16,16 +17,32 @@ html
     overflow-x: hidden;
 }
 
-
 body
 {
     margin: auto;
-    width: 50%;
+    width: 500px;
+    background: $veryLightGrayishBlue;
+
+    @include break-point(mobile)
+    {
+        width: 400px;
+    }
+
+    @include break-point(mobile-L)
+    {
+        width: 300px;
+    }
 }
 
-.title
+header
 {
-    letter-spacing: .5rem;
+    margin: 2rem 0 .5rem;
+
+    h2
+    {
+        letter-spacing: .7rem;
+        color: $veryDarkGrayishBlue3;
+    }
 }
 
 #myInput
@@ -74,8 +91,8 @@ ul li
     position: relative;
     list-style: none;
     padding: 12px 8px 12px 40px;
-    background: $veryDarkGrayishBlue3;
-    color: $veryLightGray;
+    background: $veryLightGray;
+    color: $veryDarkDesaturatedBlue;
     outline: 1px solid $lightGrayishBlue1;
 }
 
@@ -93,7 +110,6 @@ label
     cursor: pointer;
 }
 
-
 label input
 {
     position: absolute;
@@ -103,8 +119,13 @@ label input
 
 ul label.checked
 {
-    color: $darkGrayishBlue1;
+    color: $lightGrayishBlue1;
     text-decoration: line-through;
+}
+
+.counter
+{
+    color: $darkGrayishBlue2;
 }
 
 .buttons
@@ -115,20 +136,58 @@ ul label.checked
     font-size: .9rem;
 }
 
+#myBtnContainer
+{
+    display: flex;
+    gap: .8rem;
+
+    @include break-point(mobile)
+    {
+        display: none;
+    }
+}
+
+#myBtns
+{
+    display: none;
+    @include break-point(mobile)
+    {
+        font-size: .9rem;
+        display: flex;
+        justify-content: center;
+        gap: .8rem;
+        margin-top: 1rem;
+    }
+}
+
 button
 {
     cursor: pointer;
     border: none;
     background: transparent;
-    color: $veryDarkGrayishBlue3;
+    color: $darkGrayishBlue2;
 
     &:hover
     {
-        color: $lightGrayishBlue3;
+        color: $veryDarkGrayishBlue3;
     }
 }
 
 .btn.active
 {
     color: $brightBlue;
+}
+
+ li.display
+{
+    display: none;
+}
+
+.footer__text
+{
+    font-size: .9rem;
+    color: $darkGrayishBlue2;
+    text-align: center;
+    margin-top: 5rem;
+    display: none;
 }
